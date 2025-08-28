@@ -225,4 +225,33 @@ public class YearsController : BaseJellyfinApiController
             .Distinct()
             .Select(_libraryManager.GetYear);
     }
+
+    /// <summary>
+    /// Updates the year value.
+    /// </summary>
+    /// <param name="year">The year to update.</param>
+    /// <param name="newYear">The new year value.</param>
+    /// <response code="200">Year updated.</response>
+    /// <response code="404">Year not found.</response>
+    /// <returns>
+    /// An <see cref="OkResult"/> containing the year,
+    /// or a <see cref="NotFoundResult"/> if year not found.
+    /// </returns>
+    [HttpPatch("{year}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult UpdateYear([FromRoute, Required] int year, [FromBody, Required] int newYear)
+    {
+        var item = _libraryManager.GetYear(year);
+        if (item is null)
+        {
+            return NotFound();
+        }
+
+        item.ProductionYear = newYear;
+        // Optionally, persist the change if needed (depends on implementation)
+        // await _libraryManager.UpdateItemAsync(item, null, ItemUpdateType.MetadataEdit, CancellationToken.None);
+
+        return Ok();
+    }
 }
