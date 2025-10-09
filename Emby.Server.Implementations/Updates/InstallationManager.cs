@@ -167,7 +167,7 @@ namespace Emby.Server.Implementations.Updates
         public async Task<IReadOnlyList<PackageInfo>> GetAvailablePackages(CancellationToken cancellationToken = default)
         {
             var result = new List<PackageInfo>();
-            foreach (RepositoryInfo repository in _config.Configuration.PluginRepositories)
+            foreach (RepositoryInfo repository in _config.ServerConfig.PluginRepositories)
             {
                 if (repository.Enabled && repository.Url is not null)
                 {

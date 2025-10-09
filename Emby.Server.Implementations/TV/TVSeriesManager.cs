@@ -182,7 +182,7 @@ namespace Emby.Server.Implementations.TV
 
                 var nextEpisode = _libraryManager.GetItemList(nextQuery).Cast<Episode>().FirstOrDefault();
 
-                if (_configurationManager.Configuration.DisplaySpecialsWithinSeasons)
+                if (_configurationManager.ServerConfig.DisplaySpecialsWithinSeasons)
                 {
                     var consideredEpisodes = _libraryManager.GetItemList(new InternalItemsQuery(user)
                     {

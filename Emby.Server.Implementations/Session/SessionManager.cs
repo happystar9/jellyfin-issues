@@ -613,7 +613,7 @@ namespace Emby.Server.Implementations.Session
         {
             _idleTimer ??= new Timer(CheckForIdlePlayback, null, TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
 
-            if (_config.Configuration.InactiveSessionThreshold > 0)
+            if (_config.ServerConfig.InactiveSessionThreshold > 0)
             {
                 _inactiveTimer ??= new Timer(CheckForInactiveSteams, null, TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1));
             }
@@ -684,11 +684,11 @@ namespace Emby.Server.Implementations.Session
             var inactiveSessions = Sessions.Where(i =>
                     i.NowPlayingItem is not null
                     && i.PlayState.IsPaused
-                    && (DateTime.UtcNow - i.LastPausedDate).Value.TotalMinutes > _config.Configuration.InactiveSessionThreshold);
+                    && (DateTime.UtcNow - i.LastPausedDate).Value.TotalMinutes > _config.ServerConfig.InactiveSessionThreshold);
 
             foreach (var session in inactiveSessions)
             {
-                _logger.LogDebug("Session {Session} has been inactive for {InactiveTime} minutes. Stopping it.", session.Id, _config.Configuration.InactiveSessionThreshold);
+                _logger.LogDebug("Session {Session} has been inactive for {InactiveTime} minutes. Stopping it.", session.Id, _config.ServerConfig.InactiveSessionThreshold);
 
                 try
                 {
