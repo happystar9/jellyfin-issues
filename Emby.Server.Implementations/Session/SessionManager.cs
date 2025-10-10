@@ -155,7 +155,9 @@ namespace Emby.Server.Implementations.Session
         /// Gets all connections.
         /// </summary>
         /// <value>All connections.</value>
+#pragma warning disable CA1721 // Property name conflicts with method name but this is part of ISessionManager public interface
         public IEnumerable<SessionInfo> Sessions => _activeConnections.Values.OrderByDescending(c => c.LastActivityDate);
+#pragma warning restore CA1721
 
         private void OnDeviceManagerDeviceOptionsUpdated(object sender, GenericEventArgs<Tuple<string, DeviceOptions>> e)
         {

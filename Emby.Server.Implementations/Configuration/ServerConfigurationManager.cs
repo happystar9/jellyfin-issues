@@ -38,10 +38,10 @@ namespace Emby.Server.Implementations.Configuration
         public event EventHandler<GenericEventArgs<ServerConfiguration>>? ConfigurationUpdating;
 
         /// <summary>
-        /// Gets the type of the configuration.
+        /// Gets the type of the common configuration.
         /// </summary>
-        /// <value>The type of the configuration.</value>
-        protected override Type ConfigurationType => typeof(ServerConfiguration);
+        /// <value>The type of the common configuration.</value>
+        protected override Type CommonConfigurationType => typeof(ServerConfiguration);
 
         /// <summary>
         /// Gets the application paths.
