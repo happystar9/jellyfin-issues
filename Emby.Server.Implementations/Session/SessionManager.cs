@@ -1937,7 +1937,7 @@ namespace Emby.Server.Implementations.Session
         }
 
         /// <inheritdoc/>
-        public IReadOnlyList<SessionInfoDto> GetSessions(
+        public IReadOnlyList<SessionInfoDto> GetAllSessions(
             Guid userId,
             string deviceId,
             int? activeWithinSeconds,
