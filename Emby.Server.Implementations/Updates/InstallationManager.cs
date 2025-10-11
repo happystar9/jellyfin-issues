@@ -549,11 +549,9 @@ namespace Emby.Server.Implementations.Updates
                 {
                     Directory.Delete(targetDir, true);
                 }
-#pragma warning disable CA1031 // Do not catch general exception types
-                catch
-#pragma warning restore CA1031 // Do not catch general exception types
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or DirectoryNotFoundException)
                 {
-                    // Ignore any exceptions.
+                    // Ignore any exceptions related to file system operations.
                 }
             }
 
