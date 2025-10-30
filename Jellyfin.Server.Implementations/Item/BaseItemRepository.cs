@@ -1124,7 +1124,7 @@ public sealed class BaseItemRepository
     private BaseItemDto DeserializeBaseItem(BaseItemEntity baseItemEntity, bool skipDeserialization = false)
     {
         ArgumentNullException.ThrowIfNull(baseItemEntity, nameof(baseItemEntity));
-        if (_serverConfigurationManager?.Configuration is null)
+        if (_serverConfigurationManager?.ServerConfig is null)
         {
             throw new InvalidOperationException("Server Configuration manager or configuration is null");
         }
@@ -1134,7 +1134,7 @@ public sealed class BaseItemRepository
             baseItemEntity,
             _logger,
             _appHost,
-            skipDeserialization || (_serverConfigurationManager.Configuration.SkipDeserializationForBasicTypes && (typeToSerialise == typeof(Channel) || typeToSerialise == typeof(UserRootFolder))));
+            skipDeserialization || (_serverConfigurationManager.ServerConfig.SkipDeserializationForBasicTypes && (typeToSerialise == typeof(Channel) || typeToSerialise == typeof(UserRootFolder))));
     }
 
     /// <summary>
